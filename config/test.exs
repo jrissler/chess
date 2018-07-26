@@ -15,6 +15,8 @@ config :logger, level: :warn
 config :chess, Chess.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "chess_test",
-  hostname: "localhost",
+  hostname: System.get_env("POSTGRES_HOST") || "localhost",
   port: System.get_env("POSTGRES_PORT") || "5432",
+  username: System.get_env("POSTGRES_USER") || System.get_env("USER"),
+  password: System.get_env("POSTGRES_PASSWORD") || nil,
   pool: Ecto.Adapters.SQL.Sandbox
